@@ -9,7 +9,7 @@ exports.helloIiif = (req, res) => {
   console.log(req);
   console.log(req.body.url);
   try {
-    const results = await client.labelDetection(req.body.url);
+    const results = Promise.resolve(client.labelDetection(req.body.url));
     const labels = results[0].labelAnnotations;
     res.send('Labels:');
     res.send(labels.map(label => label.description));
