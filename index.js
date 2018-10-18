@@ -13,7 +13,6 @@ exports.helloIiif = async(req, res) => {
     .then(results => {
       const labels = results[0].labelAnnotations;
 
-      res.send('Labels:');
       res.send(labels.map(label => label.description));
     })
     .catch(err => {
