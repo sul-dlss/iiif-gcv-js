@@ -19,14 +19,17 @@ exports.helloIiif = async(req, res) => {
     });
 
   const foo = manifestation.getSequences()[0].getCanvases()[0].getCanonicalImageUri(1000);
+  console.log(foo);
   await client
     .labelDetection(foo)
     .then(results => {
+      console.log(results);
       const labels = results[0].labelAnnotations;
 
       res.send(labels.map(label => label.description));
     })
     .catch(err => {
+      console.log(err)
       console.error('ERROR:', err);
     });
 }
