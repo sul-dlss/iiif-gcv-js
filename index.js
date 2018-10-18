@@ -8,7 +8,7 @@ exports.helloIiif = (req, res) => {
   // Performs label detection on the image file
   console.log(req);
   console.log(req.body.url);
-  client
+  await client
     .labelDetection(req.body.url)
     .then(results => {
       const labels = results[0].labelAnnotations;
