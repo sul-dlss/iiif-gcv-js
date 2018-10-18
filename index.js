@@ -8,15 +8,12 @@ exports.helloIiif = (req, res) => {
   // Performs label detection on the image file
   console.log(req);
   console.log(req.body.url);
-  await client
-    .labelDetection(req.body.url)
-    .then(results => {
-      const labels = results[0].labelAnnotations;
-
-      res.send('Labels:');
-      res.send(labels.map(label => label.description));
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  try {
+    const results = await client.labelDetection(req.body.url);
+    const labels = results[0].labelAnnotations;
+    res.send('Labels:');
+    res.send(labels.map(label => label.description));
+  } catch(err) {
+    console.error(err);
+  }
 }
