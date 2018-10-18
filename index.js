@@ -17,8 +17,9 @@ exports.helloIiif = async(req, res) => {
     .catch(err => {
       console.log('ERROR: downloading manifest', req.body.url);
     });
+  const width = req.body.width || 1000;
 
-  const foo = manifestation.getSequences()[0].getCanvases()[0].getCanonicalImageUri(1000);
+  const foo = manifestation.getSequences()[0].getCanvases()[0].getCanonicalImageUri(width);
   console.log(foo);
   await client
     .labelDetection(foo)
