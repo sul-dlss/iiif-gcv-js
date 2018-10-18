@@ -9,6 +9,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@google-cloud/vision": "^0.22.1"
+    "@google-cloud/vision": "^0.22.1",
+    "manifesto.js": "^3.0.9"
   }
 }

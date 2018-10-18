@@ -1,5 +1,6 @@
 // Imports the Google Cloud client library
 const vision = require('@google-cloud/vision');
+const manifesto = require('manifesto.js');
 
 // Creates a client
 const client = new vision.ImageAnnotatorClient();
@@ -8,8 +9,18 @@ exports.helloIiif = async(req, res) => {
   // Performs label detection on the image file
   console.log(req);
   console.log(req.body.url)
+  let manifestation;
+  await manifesto.loadManifest(req.body.url)
+    .then((data) => {
+      manifestation = manifesto.create(data);
+    })
+    .catch(err => {
+      console.log('ERROR: downloading manifest', req.body.url);
+    });
+
+  const foo = manifestation.getSequences()[0].getCanvases()[0].getCanonicalImageUri(1000);
   await client
-    .labelDetection(req.body.url)
+    .labelDetection(foo)
     .then(results => {
       const labels = results[0].labelAnnotations;
 
